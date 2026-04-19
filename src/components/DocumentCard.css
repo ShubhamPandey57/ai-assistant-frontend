@@ -61,3 +61,51 @@
   font-size: 0.78rem;
   padding: 7px 10px;
 }
+
+/* ── Responsive Document Card ── */
+@media (max-width: 768px) {
+  .doc-card {
+    padding: 16px;
+  }
+  
+  .doc-name {
+    font-size: 0.9rem;
+  }
+  
+  .doc-card-actions {
+    flex-wrap: wrap;
+  }
+  
+  .doc-card-actions .btn-secondary {
+    min-width: calc(50% - 4px);
+  }
+}
+
+@media (max-width: 480px) {
+  .doc-card {
+    padding: 14px;
+    gap: 12px;
+  }
+  
+  .doc-icon {
+    font-size: 1.5rem;
+  }
+  
+  .doc-name {
+    font-size: 0.85rem;
+  }
+  
+  .doc-meta {
+    font-size: 0.7rem;
+    flex-wrap: wrap;
+  }
+  
+  .doc-card-actions {
+    flex-direction: column;
+  }
+  
+  .doc-card-actions .btn-secondary {
+    width: 100%;
+    min-width: unset;
+  }
+}
