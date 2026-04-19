@@ -39,12 +39,7 @@ const Header = ({ onSidebarToggle }) => {
             <span className="user-email">{user?.email}</span>
           </div>
         </div>
-        <button className="btn btn-ghost btn-sm header-logout" onClick={() => navigate('/')} title="Go to Home">
-          🏠 Home
-        </button>
-        <button className="btn btn-ghost btn-sm header-logout" onClick={handleLogout} title="Logout">
-          ⎋ Logout
-        </button>
+
       </div>
     </header>
   );

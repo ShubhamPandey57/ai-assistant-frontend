@@ -39,9 +39,9 @@ const ContactPage = () => {
   return (
     <div className="contact-container">
       <nav className="contact-nav">
-        <Link to="/" className="contact-logo-premium">
-          <div className="circle-logo-contact"></div>
-          <span className="logo-text-contact">StudyAI</span>
+        <Link to="/" className="home-logo-modern">
+          <div className="circle-logo-home"></div>
+          <span className="logo-text-home">StudyAI</span>
         </Link>
         <div className="contact-nav-actions">
           <Link to="/" className="nav-back-home">

@@ -1,4 +1,5 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './Sidebar.css';
 
 const navItems = [
@@ -7,6 +8,14 @@ const navItems = [
 ];
 
 const Sidebar = ({ open, onClose }) => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
+
   return (
     <aside className={`sidebar${open ? ' open' : ''}`}>
       <Link to="/" className="sidebar-logo" onClick={onClose}>
@@ -28,6 +37,21 @@ const Sidebar = ({ open, onClose }) => {
           </NavLink>
         ))}
       </nav>
+
+      <div className="sidebar-actions">
+        <NavLink
+          to="/"
+          className={({ isActive }) => `nav-item action-item home-item ${isActive ? 'active' : ''}`}
+          onClick={onClose}
+        >
+          <span className="nav-icon">🏠</span>
+          <span>Home</span>
+        </NavLink>
+        <button className="nav-item action-item logout-item" onClick={handleLogout}>
+          <span className="nav-icon">⎋</span>
+          <span>Logout</span>
+        </button>
+      </div>
 
       <div className="sidebar-footer">
         <div className="sidebar-footer-text">

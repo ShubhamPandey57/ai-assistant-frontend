@@ -36,7 +36,7 @@ const HomePage = () => {
             <Link to="/dashboard" className="btn-signup-home">Go to Dashboard</Link>
           ) : (
             <>
-              <Link to="/login" className="btn-login-home">Log In</Link>
+              <Link to="/login" className="btn-signup-home">Log In</Link>
               <Link to="/register" className="btn-signup-home">Sign Up</Link>
             </>
           )}
