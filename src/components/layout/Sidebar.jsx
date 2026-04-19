@@ -6,10 +6,10 @@ const navItems = [
   { to: '/documents', icon: '📄', label: 'Documents' },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ open, onClose }) => {
   return (
-    <aside className="sidebar">
-      <Link to="/" className="sidebar-logo">
+    <aside className={`sidebar${open ? ' open' : ''}`}>
+      <Link to="/" className="sidebar-logo" onClick={onClose}>
         <div className="circle-logo-sidebar"></div>
         <span className="logo-text">StudyAI</span>
       </Link>
@@ -21,6 +21,7 @@ const Sidebar = () => {
             key={to}
             to={to}
             className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+            onClick={onClose}
           >
             <span className="nav-icon">{icon}</span>
             <span>{label}</span>

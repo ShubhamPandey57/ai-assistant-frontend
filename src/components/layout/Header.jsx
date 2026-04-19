@@ -2,7 +2,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ onSidebarToggle }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -16,6 +16,9 @@ const Header = () => {
 
   return (
     <header className="app-header">
+      <button className="sidebar-toggle" onClick={onSidebarToggle} aria-label="Open sidebar" style={{ display: 'none' }}>
+        <span aria-hidden="true">☰</span>
+      </button>
       <div className="header-left">
         <div className="header-breadcrumb">
           <Link to="/" className="breadcrumb-link">

@@ -12,6 +12,20 @@
   padding: 0 32px;
   z-index: 90;
   transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.sidebar-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--layout-text);
+  font-size: 1.7rem;
+  margin-right: 16px;
+  height: var(--header-height);
+  cursor: pointer;
 }
 
 .header-left {
@@ -104,5 +118,11 @@
   .app-header {
     left: 0;
     padding: 0 16px;
+    width: 100vw;
+    min-width: 0;
+  }
+  .sidebar-toggle {
+    display: inline-flex !important;
+    margin-right: 12px;
   }
 }
