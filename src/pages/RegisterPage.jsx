@@ -4,11 +4,10 @@ import { useAuth } from '../context/AuthContext';
 import './AuthPages.css';
 
 const RegisterPage = () => {
-  const [form, setForm] = useState({ name: '', email: '', password: '', adminId: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [isAdminMode, setIsAdminMode] = useState(false);
   const { register } = useAuth();
   const navigate = useNavigate();
 
@@ -20,8 +19,8 @@ const RegisterPage = () => {
     }
     setLoading(true);
     try {
-      await register(form.name, form.email, form.password, isAdminMode, isAdminMode ? form.adminId : null);
-      navigate(isAdminMode ? '/admin' : '/dashboard');
+      await register(form.name, form.email, form.password);
+      navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed. Please try again.');
     } finally {
@@ -99,23 +98,6 @@ const RegisterPage = () => {
           <div className="auth-form-container">
             <h2 className="auth-heading">Sign Up</h2>
             
-            <div className="role-toggle-container">
-              <button 
-                className={`role-toggle-btn ${!isAdminMode ? 'active' : ''}`}
-                type="button"
-                onClick={() => setIsAdminMode(false)}
-              >
-                User
-              </button>
-              <button 
-                className={`role-toggle-btn ${isAdminMode ? 'active' : ''}`}
-                type="button"
-                onClick={() => setIsAdminMode(true)}
-              >
-                Admin
-              </button>
-            </div>
-            
             {error && <div className="alert alert-error" role="alert">⚠ {error}</div>}
 
             <form onSubmit={handleSubmit} className="auth-form-modern">
@@ -145,21 +127,6 @@ const RegisterPage = () => {
                   autoComplete="email"
                 />
               </div>
-
-              {isAdminMode && (
-                <div className="form-group-modern">
-                  <input
-                    id="reg-adminId"
-                    type="text"
-                    className="input-modern"
-                    placeholder="Admin ID"
-                    value={form.adminId}
-                    onChange={e => setForm(p => ({ ...p, adminId: e.target.value }))}
-                    required
-                    autoComplete="off"
-                  />
-                </div>
-              )}
 
               <div className="form-group-modern">
                 <input

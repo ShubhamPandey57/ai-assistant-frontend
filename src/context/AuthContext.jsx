@@ -31,12 +31,8 @@ export const AuthProvider = ({ children }) => {
     return user;
   };
 
-  const register = async (name, email, password, isAdmin = false, adminId = null) => {
+  const register = async (name, email, password) => {
     const payload = { name, email, password };
-    if (isAdmin) {
-      payload.isAdmin = true;
-      payload.adminId = adminId;
-    }
     const res = await authApi.register(payload);
     const { token, user } = res.data;
     localStorage.setItem('token', token);
