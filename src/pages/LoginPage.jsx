@@ -4,31 +4,24 @@ import { useAuth } from '../context/AuthContext';
 import './AuthPages.css';
 
 const LoginPage = () => {
-  const [form, setForm] = useState({ email: '', adminId: '', password: '' });
+  const [form, setForm] = useState({ adminId: '', password: '' });
   const [error, setError] = useState('');
-  const [emailError, setEmailError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isAdminLogin, setIsAdminLogin] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const validateEmail = (email) => {
-    // Simple email regex
-    return /^\S+@\S+\.\S+$/.test(email);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setEmailError('');
-    if (!isAdminLogin && !validateEmail(form.email)) {
-      setEmailError('Please provide a valid email');
+    if (!form.adminId.trim()) {
+      setError('Please enter your Admin ID');
       return;
     }
     setLoading(true);
     try {
-      const user = await login(isAdminLogin ? null : form.email, form.password, isAdminLogin ? form.adminId : null);
+      const user = await login(null, form.password, form.adminId);
       navigate(user.isAdmin ? '/admin' : '/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');
@@ -112,7 +105,7 @@ const LoginPage = () => {
                 className={`role-toggle-btn ${!isAdminLogin ? 'active' : ''}`}
                 onClick={() => {
                   setIsAdminLogin(false);
-                  console.log('Switched to User login');
+                  setError('');
                 }}
               >
                 User
@@ -121,7 +114,7 @@ const LoginPage = () => {
                 className={`role-toggle-btn ${isAdminLogin ? 'active' : ''}`}
                 onClick={() => {
                   setIsAdminLogin(true);
-                  console.log('Switched to Admin login');
+                  setError('');
                 }}
               >
                 Admin
@@ -131,38 +124,18 @@ const LoginPage = () => {
             {error && <div className="alert alert-error" role="alert">⚠ {error}</div>}
 
             <form onSubmit={handleSubmit} className="auth-form-modern">
-              {!isAdminLogin ? (
-                <div className="form-group-modern">
-                  <input
-                    id="login-email"
-                    type="text"
-                    className="input-modern"
-                    placeholder="Email"
-                    value={form.email}
-                    onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
-                    required
-                    autoComplete="email"
-                  />
-                  {emailError && (
-                    <div className="alert alert-error" role="alert" style={{marginTop: 8}}>
-                      ⚠ {emailError}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="form-group-modern">
-                  <input
-                    id="login-adminId"
-                    type="text"
-                    className="input-modern"
-                    placeholder="Admin ID"
-                    value={form.adminId}
-                    onChange={e => setForm(p => ({ ...p, adminId: e.target.value }))}
-                    required
-                    autoComplete="username"
-                  />
-                </div>
-              )}
+              <div className="form-group-modern">
+                <input
+                  id="login-adminId"
+                  type="text"
+                  className="input-modern"
+                  placeholder="Admin ID"
+                  value={form.adminId}
+                  onChange={e => setForm(p => ({ ...p, adminId: e.target.value }))}
+                  required
+                  autoComplete="username"
+                />
+              </div>
 
               <div className="form-group-modern">
                 <input
