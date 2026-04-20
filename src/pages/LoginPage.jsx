@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import './AuthPages.css';
 
 const LoginPage = () => {
-  const [form, setForm] = useState({ adminId: '', password: '' });
+  const [form, setForm] = useState({ email: '', adminId: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -15,13 +15,22 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if (!form.adminId.trim()) {
+    if (isAdminLogin && !form.adminId.trim()) {
       setError('Please enter your Admin ID');
+      return;
+    }
+    if (!isAdminLogin && !form.email.trim()) {
+      setError('Please enter your email');
       return;
     }
     setLoading(true);
     try {
-      const user = await login(null, form.password, form.adminId);
+      let user;
+      if (isAdminLogin) {
+        user = await login(null, form.password, form.adminId);
+      } else {
+        user = await login(form.email, form.password);
+      }
       navigate(user.isAdmin ? '/admin' : '/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');
@@ -125,16 +134,29 @@ const LoginPage = () => {
 
             <form onSubmit={handleSubmit} className="auth-form-modern">
               <div className="form-group-modern">
-                <input
-                  id="login-adminId"
-                  type="text"
-                  className="input-modern"
-                  placeholder="Admin ID"
-                  value={form.adminId}
-                  onChange={e => setForm(p => ({ ...p, adminId: e.target.value }))}
-                  required
-                  autoComplete="username"
-                />
+                {isAdminLogin ? (
+                  <input
+                    id="login-adminId"
+                    type="text"
+                    className="input-modern"
+                    placeholder="Admin ID"
+                    value={form.adminId}
+                    onChange={e => setForm(p => ({ ...p, adminId: e.target.value }))}
+                    required
+                    autoComplete="username"
+                  />
+                ) : (
+                  <input
+                    id="login-email"
+                    type="email"
+                    className="input-modern"
+                    placeholder="Email"
+                    value={form.email}
+                    onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
+                    required
+                    autoComplete="email"
+                  />
+                )}
               </div>
 
               <div className="form-group-modern">
