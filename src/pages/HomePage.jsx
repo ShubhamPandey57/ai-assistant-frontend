@@ -109,12 +109,12 @@ const HomePage = () => {
             <p>Have questions, feedback, or want to explore enterprise solutions? We'd love to hear from you.</p>
             <div style={{ marginBottom: '20px' }}>
               <Link to="/contact" className="btn btn-primary">
-                dY' Get in Touch
+                Get in Touch
               </Link>
             </div>
             <ul className="contact-info">
-              <li><span>?</span> Email: <a href="mailto:hello@studyai.com" style={{ color: 'inherit' }}>hello@studyai.com</a></li>
-              <li><span>?</span> Phone: <a href="tel:+18001234567" style={{ color: 'inherit' }}>+1 (800) 123-4567</a></li>
+              <li><span className="method-label">📧</span> Email: <a href="mailto:hello@studyai.com" style={{ color: 'inherit' }}>hello@studyai.com</a></li>
+              <li><span className="method-label">📞</span> Phone: <a href="tel:+18001234567" style={{ color: 'inherit' }}>+1 (800) 123-4567</a></li>
             </ul>
           </div>
         </div>
