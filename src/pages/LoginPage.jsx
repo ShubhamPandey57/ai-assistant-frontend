@@ -6,15 +6,26 @@ import './AuthPages.css';
 const LoginPage = () => {
   const [form, setForm] = useState({ email: '', adminId: '', password: '' });
   const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isAdminLogin, setIsAdminLogin] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    // Simple email regex
+    return /^\S+@\S+\.\S+$/.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setEmailError('');
+    if (!isAdminLogin && !validateEmail(form.email)) {
+      setEmailError('Please provide a valid email');
+      return;
+    }
     setLoading(true);
     try {
       const user = await login(isAdminLogin ? null : form.email, form.password, isAdminLogin ? form.adminId : null);
@@ -99,13 +110,19 @@ const LoginPage = () => {
             <div className="role-toggle-container">
               <button 
                 className={`role-toggle-btn ${!isAdminLogin ? 'active' : ''}`}
-                onClick={() => setIsAdminLogin(false)}
+                onClick={() => {
+                  setIsAdminLogin(false);
+                  console.log('Switched to User login');
+                }}
               >
                 User
               </button>
               <button 
                 className={`role-toggle-btn ${isAdminLogin ? 'active' : ''}`}
-                onClick={() => setIsAdminLogin(true)}
+                onClick={() => {
+                  setIsAdminLogin(true);
+                  console.log('Switched to Admin login');
+                }}
               >
                 Admin
               </button>
@@ -118,14 +135,19 @@ const LoginPage = () => {
                 <div className="form-group-modern">
                   <input
                     id="login-email"
-                    type="email"
+                    type="text"
                     className="input-modern"
-                    placeholder="Email or Username"
+                    placeholder="Email"
                     value={form.email}
                     onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
                     required
                     autoComplete="email"
                   />
+                  {emailError && (
+                    <div className="alert alert-error" role="alert" style={{marginTop: 8}}>
+                      ⚠ {emailError}
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="form-group-modern">
