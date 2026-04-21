@@ -7,6 +7,7 @@ import Layout from './components/layout/Layout';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import GoogleCallback from './pages/GoogleCallback';
 import DashboardPage from './pages/DashboardPage';
 import DocumentsPage from './pages/DocumentsPage';
 import ChatPage from './pages/ChatPage';
@@ -24,6 +25,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/auth/callback" element={<GoogleCallback />} />
 
             {/* Protected */}
             <Route element={<ProtectedRoute />}>

@@ -413,7 +413,282 @@
   cursor: pointer;
 }
 
-/* Responsiveness */
+/* ── Remember Me + Forgot Password Row ── */
+.remember-forgot-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 28px;
+  padding: 0 4px;
+}
+
+.remember-me-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.remember-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d0d0d0;
+  border-radius: 5px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.remember-checkbox:checked {
+  background: linear-gradient(135deg, #ff4d4d, #c92a6c);
+  border-color: transparent;
+}
+
+.remember-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 6px;
+  height: 10px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+.remember-checkbox:focus-visible {
+  outline: 2px solid #ff4d4d;
+  outline-offset: 2px;
+}
+
+.remember-text {
+  font-size: 0.88rem;
+  color: #555;
+  font-weight: 400;
+}
+
+.forgot-link {
+  color: #fca311;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.forgot-link:hover {
+  color: #e0920a;
+}
+
+/* ── OR Divider ── */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0 20px;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: #e8e8e8;
+}
+
+.divider-text {
+  font-size: 0.8rem;
+  color: #999;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ── Google Sign-In Button ── */
+.btn-google {
+  width: 100%;
+  padding: 15px 24px;
+  border-radius: 30px;
+  background: #ffffff;
+  color: #3c4043;
+  border: 1.5px solid #e0e0e0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  letter-spacing: 0.01em;
+}
+
+.btn-google:hover {
+  background: #f8f8f8;
+  border-color: #c8c8c8;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.btn-google:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ── Remember Me Row ─────────────────────────────────────────────────────── */
+.auth-remember-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  margin-bottom: 28px;
+  padding: 0 4px;
+}
+
+.remember-me-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: #555;
+  user-select: none;
+  font-weight: 400;
+}
+
+.custom-checkbox-wrapper {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.remember-me-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.custom-checkbox {
+  position: absolute;
+  inset: 0;
+  border: 2px solid #d0d0d0;
+  border-radius: 6px;
+  background: #fff;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.remember-me-input:checked ~ .custom-checkbox {
+  background: linear-gradient(135deg, #ff4d4d, #c92a6c);
+  border-color: transparent;
+}
+
+.custom-checkbox::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+.remember-me-input:checked ~ .custom-checkbox::after {
+  display: block;
+}
+
+.auth-remember-row .auth-forgot {
+  margin: 0;
+  padding: 0;
+}
+
+/* ── OR Divider ──────────────────────────────────────────────────────────── */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 16px;
+  color: #bbb;
+  font-size: 0.8rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e8e8e8;
+}
+
+/* ── Google Button ───────────────────────────────────────────────────────── */
+.btn-google {
+  width: 100%;
+  padding: 15px 24px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 30px;
+  background: #fff;
+  color: #333;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.btn-google:hover {
+  border-color: #c0c0c0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.btn-google:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ── Alert ───────────────────────────────────────────────────────────────── */
+.alert {
+  padding: 12px 18px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.alert-error {
+  background: #fff0f0;
+  color: #c0392b;
+  border: 1px solid #f5c6c6;
+}
+
+/* ── Responsiveness ──────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .auth-split-layout {
     flex-direction: column;
