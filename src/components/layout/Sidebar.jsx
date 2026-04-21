@@ -5,6 +5,7 @@ import './Sidebar.css';
 const navItems = [
   { to: '/dashboard', icon: '⊞', label: 'Dashboard' },
   { to: '/documents', icon: '📄', label: 'Documents' },
+  { to: '/settings',  icon: '⚙️', label: 'Settings' },
 ];
 
 const Sidebar = ({ open, onClose }) => {

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { DocumentProvider } from './context/DocumentContext';
+import { ThemeProvider } from './context/ThemeContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/layout/Layout';
 
@@ -14,10 +15,12 @@ import ChatPage from './pages/ChatPage';
 import FlashcardsPage from './pages/FlashcardsPage';
 import AdminPage from './pages/AdminPage';
 import ContactPage from './pages/ContactPage';
+import SettingsPage from './pages/SettingsPage';
 
 function App() {
   return (
-    <AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
       <DocumentProvider>
         <BrowserRouter>
           <Routes>
@@ -35,6 +38,7 @@ function App() {
                 <Route path="/chat/:documentId" element={<ChatPage />} />
                 <Route path="/flashcards/:documentId" element={<FlashcardsPage />} />
                 <Route path="/admin" element={<AdminPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
               </Route>
             </Route>
 
@@ -45,6 +49,7 @@ function App() {
         </BrowserRouter>
       </DocumentProvider>
     </AuthProvider>
+    </ThemeProvider>
   );
 }
 
