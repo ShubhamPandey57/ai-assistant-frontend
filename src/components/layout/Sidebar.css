@@ -63,9 +63,9 @@
   box-shadow: 0 0 15px rgba(255, 77, 77, 0.4);
 }
 
-.logo-text {
+.sidebar .logo-text {
   font-size: 1.25rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.02em;
   color: #ffffff;
 }

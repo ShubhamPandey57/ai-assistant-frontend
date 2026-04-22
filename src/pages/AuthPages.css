@@ -265,9 +265,9 @@
   border-bottom-color: #8e44ad;
 }
 
-.logo-text {
+.auth-split-layout .logo-text {
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: -0.02em;
   opacity: 1;
   filter: none;
