@@ -24,6 +24,45 @@ const Toast = ({ msg, type, onClose }) => (
   </div>
 );
 
+const PasswordInput = ({ value, onChange, id, autoComplete, placeholder, minLength }) => {
+  const [show, setShow] = useState(false);
+  return (
+    <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+      <input
+        id={id}
+        type={show ? "text" : "password"}
+        className="settings-input"
+        value={value}
+        onChange={onChange}
+        required
+        autoComplete={autoComplete}
+        placeholder={placeholder}
+        minLength={minLength}
+        style={{ paddingRight: '40px' }}
+      />
+      <button
+        type="button"
+        onClick={() => setShow(!show)}
+        style={{ 
+          position: 'absolute', 
+          right: '12px', 
+          background: 'none', 
+          border: 'none', 
+          cursor: 'pointer', 
+          color: 'var(--text-muted)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '4px'
+        }}
+        title={show ? "Hide password" : "Show password"}
+      >
+        {show ? '🙈' : '👁️'}
+      </button>
+    </div>
+  );
+};
+
 const SettingsPage = () => {
   const { user, setUserFromGoogle } = useAuth();
   const { theme, setTheme } = useTheme();
@@ -66,6 +105,9 @@ const SettingsPage = () => {
     if (pwForm.newPassword !== pwForm.confirmPassword) {
       showToast('New passwords do not match.', 'error'); return;
     }
+    if (pwForm.currentPassword === pwForm.newPassword) {
+      showToast('New password cannot be the same as the current password.', 'error'); return;
+    }
     setPwLoading(true);
     try {
       await changePassword({ currentPassword: pwForm.currentPassword, newPassword: pwForm.newPassword });
@@ -84,6 +126,11 @@ const SettingsPage = () => {
 
   const handleCredChange = async (e) => {
     e.preventDefault();
+    if (user?.isAdmin && credForm.newValue === user?.adminId) {
+      showToast('New Admin ID cannot be the same as the current Admin ID.', 'error'); return;
+    } else if (!user?.isAdmin && credForm.newValue === user?.email) {
+      showToast(`New Email Address cannot be the same as the current Email Address.`, 'error'); return;
+    }
     setCredLoading(true);
     try {
       let res;
@@ -296,39 +343,30 @@ const SettingsPage = () => {
                 <form onSubmit={handlePasswordChange} className="settings-form">
                   <div className="settings-field">
                     <label className="settings-label">Current Password</label>
-                    <input
+                    <PasswordInput
                       id="settings-cur-password"
-                      type="password"
-                      className="settings-input"
                       value={pwForm.currentPassword}
                       onChange={e => setPwForm(p => ({ ...p, currentPassword: e.target.value }))}
-                      required
                       autoComplete="current-password"
                     />
                   </div>
                   <div className="settings-field">
                     <label className="settings-label">New Password</label>
-                    <input
+                    <PasswordInput
                       id="settings-new-password"
-                      type="password"
-                      className="settings-input"
                       value={pwForm.newPassword}
                       onChange={e => setPwForm(p => ({ ...p, newPassword: e.target.value }))}
                       minLength={6}
-                      required
                       autoComplete="new-password"
                     />
                   </div>
                   <div className="settings-field">
                     <label className="settings-label">Confirm New Password</label>
-                    <input
+                    <PasswordInput
                       id="settings-confirm-password"
-                      type="password"
-                      className="settings-input"
                       value={pwForm.confirmPassword}
                       onChange={e => setPwForm(p => ({ ...p, confirmPassword: e.target.value }))}
                       minLength={6}
-                      required
                       autoComplete="new-password"
                     />
                   </div>
@@ -362,13 +400,10 @@ const SettingsPage = () => {
                   </div>
                   <div className="settings-field">
                     <label className="settings-label">Confirm with Password</label>
-                    <input
+                    <PasswordInput
                       id="settings-cred-password"
-                      type="password"
-                      className="settings-input"
                       value={credForm.password}
                       onChange={e => setCredForm(p => ({ ...p, password: e.target.value }))}
-                      required
                       autoComplete="current-password"
                     />
                   </div>

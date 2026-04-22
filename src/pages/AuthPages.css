@@ -268,13 +268,10 @@
 .logo-text {
   font-size: 1.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #7c3aed 0%, #3498db 40%, #f1c40f 70%, #e74c3c 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   letter-spacing: -0.02em;
   opacity: 1;
   filter: none;
+  color: #000;
 }
 
 .auth-signup-link {
