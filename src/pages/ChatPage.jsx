@@ -4,6 +4,7 @@ import { getDocument } from '../api/document.api';
 import { getChatHistory, clearChatHistory } from '../api/chat.api';
 import { askQuestion, summarize } from '../api/ai.api';
 import ReactMarkdown from 'react-markdown';
+import { ConfirmDialog } from '../components/ConfirmDialog';
 import './ChatPage.css';
 
 const ChatPage = () => {
@@ -21,6 +22,7 @@ const ChatPage = () => {
   const [summary, setSummary] = useState('');
   const [summaryLoading, setSummaryLoading] = useState(false);
   const [summaryError, setSummaryError] = useState('');
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
@@ -83,10 +85,15 @@ const ChatPage = () => {
     }
   };
 
-  const handleClearChat = async () => {
-    if (!window.confirm('Clear all chat history for this document?')) return;
-    await clearChatHistory(documentId);
-    setMessages([]);
+  const handleClearChatConfirm = async () => {
+    try {
+      await clearChatHistory(documentId);
+      setMessages([]);
+    } catch (err) {
+      console.error('Failed to clear chat:', err);
+    } finally {
+      setConfirmOpen(false);
+    }
   };
 
   if (loadingHistory) {
@@ -95,6 +102,15 @@ const ChatPage = () => {
 
   return (
     <div className="chat-page">
+      <ConfirmDialog
+        isOpen={confirmOpen}
+        title="Clear Chat History"
+        message="Clear all chat history for this document? This action cannot be undone."
+        onConfirm={handleClearChatConfirm}
+        onCancel={() => setConfirmOpen(false)}
+        danger
+      />
+
       {/* Main chat area */}
       <div className={`chat-main ${summaryOpen ? 'with-panel' : ''}`}>
         <div className="chat-header">
@@ -107,7 +123,7 @@ const ChatPage = () => {
           </div>
           <div className="chat-header-actions">
             {messages.length > 0 && (
-              <button className="btn btn-ghost btn-sm" onClick={handleClearChat} title="Clear history">🗑 Clear</button>
+              <button className="btn btn-ghost btn-sm" onClick={() => setConfirmOpen(true)} title="Clear history">🗑 Clear</button>
             )}
             <button
               id="summary-toggle-btn"
