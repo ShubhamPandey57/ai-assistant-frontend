@@ -376,41 +376,6 @@
   border-width: 2px;
 }
 
-/* ── Dark Theme CSS Variables ────────────────────────────────────────────── */
-[data-theme="dark"] {
-  --bg-primary:    #0f172a;
-  --bg-secondary:  #1e293b;
-  --bg-card:       #1e293b;
-  --bg-card-hover: #273549;
-  --bg-input:      #1e293b;
-
-  --text-primary:   #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted:     #64748b;
-  --text-accent:    #ff4d4d;
-
-  --border-color:   rgba(255,255,255,0.08);
-  --border-accent:  rgba(255,77,77,0.4);
-
-  --shadow-sm:  0 1px 3px rgba(0,0,0,0.4);
-  --shadow-md:  0 4px 16px rgba(0,0,0,0.4);
-  --shadow-lg:  0 8px 32px rgba(0,0,0,0.5);
-}
-
-[data-theme="light"] {
-  --bg-primary:    #f8fafc;
-  --bg-secondary:  #ffffff;
-  --bg-card:       #ffffff;
-  --bg-card-hover: #f1f5f9;
-  --bg-input:      #ffffff;
-
-  --text-primary:   #111827;
-  --text-secondary: #4b5563;
-  --text-muted:     #9ca3af;
-
-  --border-color:  #e5e7eb;
-  --border-accent: rgba(255,77,77,0.4);
-}
 
 /* Responsive */
 @media (max-width: 768px) {
