@@ -1,5 +1,5 @@
 import { useAuth } from '../../context/AuthContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, NavLink } from 'react-router-dom';
 import './Header.css';
 
 const Header = ({ onSidebarToggle }) => {
@@ -21,9 +21,14 @@ const Header = ({ onSidebarToggle }) => {
       </button>
       <div className="header-left">
         <div className="header-breadcrumb">
-          <Link to="/" className="breadcrumb-link">
-            <span className="breadcrumb-app">AI Study Assistant</span>
-          </Link>
+          <NavLink
+            to="/"
+            className={({ isActive }) => `nav-item action-item home-item ${isActive ? 'active' : ''}`}
+            style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit', padding: '8px 16px', borderRadius: '8px', background: 'rgba(255,255,255,0.05)' }}
+          >
+            <span className="nav-icon">🏠</span>
+            <span>Home</span>
+          </NavLink>
         </div>
       </div>
       <div className="header-right">
