@@ -32,7 +32,7 @@ const Header = ({ onSidebarToggle }) => {
             ⚙ Admin
           </button>
         )}
-        <div className="user-info">
+        <div className="user-info" onClick={() => navigate('/settings')} style={{ cursor: 'pointer' }}>
           <div className="user-avatar">{getInitials(user?.name)}</div>
           <div className="user-details">
             <span className="user-name">{user?.name}</span>
