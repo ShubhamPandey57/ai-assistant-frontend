@@ -5,7 +5,6 @@ import './Sidebar.css';
 const navItems = [
   { to: '/dashboard', icon: '⊞', label: 'Dashboard' },
   { to: '/documents', icon: '📄', label: 'Documents' },
-  { to: '/settings',  icon: '⚙️', label: 'Settings' },
 ];
 
 const Sidebar = ({ open, onClose }) => {
@@ -41,12 +40,12 @@ const Sidebar = ({ open, onClose }) => {
 
       <div className="sidebar-actions">
         <NavLink
-          to="/"
-          className={({ isActive }) => `nav-item action-item home-item ${isActive ? 'active' : ''}`}
+          to="/settings"
+          className={({ isActive }) => `nav-item action-item settings-item ${isActive ? 'active' : ''}`}
           onClick={onClose}
         >
-          <span className="nav-icon">🏠</span>
-          <span>Home</span>
+          <span className="nav-icon">⚙️</span>
+          <span>Settings</span>
         </NavLink>
         <button className="nav-item action-item logout-item" onClick={handleLogout}>
           <span className="nav-icon">⎋</span>
