@@ -1,6 +1,7 @@
 import api from './axios.config';
 
 export const getAdminUsers = () => api.get('/admin/users');
+export const addAdminUser = (data) => api.post('/admin/users', data);
 export const deleteAdminUser = (id) => api.delete(`/admin/users/${id}`);
 export const getAdminDocuments = () => api.get('/admin/documents');
 export const deleteAdminDocument = (id) => api.delete(`/admin/documents/${id}`);

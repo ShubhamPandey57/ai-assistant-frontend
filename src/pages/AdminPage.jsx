@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { 
-  getAdminStats, getAdminUsers, deleteAdminUser, 
+  getAdminStats, getAdminUsers, deleteAdminUser, addAdminUser,
   getAdminDocuments, deleteAdminDocument,
   getAdminFlashcards, updateAdminFlashcard, deleteAdminFlashcard,
   getAdminContacts, updateAdminContact, deleteAdminContact
@@ -26,6 +26,9 @@ const AdminPage = () => {
   const [contacts, setContacts] = useState([]);
   const [replyingContactId, setReplyingContactId] = useState(null);
   const [replyText, setReplyText] = useState('');
+  const [isAddingUser, setIsAddingUser] = useState(false);
+  const [addUserForm, setAddUserForm] = useState({ name: '', email: '', password: '', isAdmin: false, adminId: '' });
+  const [addError, setAddError] = useState('');
 
   useEffect(() => {
     if (!user?.isAdmin) { navigate('/dashboard'); return; }
@@ -106,6 +109,19 @@ const AdminPage = () => {
       setEditingFlashcardId(null);
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const handleAddUser = async (e) => {
+    e.preventDefault();
+    setAddError('');
+    try {
+      const res = await addAdminUser(addUserForm);
+      setUsers([res.data.user, ...users]);
+      setIsAddingUser(false);
+      setAddUserForm({ name: '', email: '', password: '', isAdmin: false, adminId: '' });
+    } catch (err) {
+      setAddError(err.response?.data?.message || 'Failed to add user');
     }
   };
 
@@ -202,8 +218,40 @@ const AdminPage = () => {
 
           {/* Users Tab */}
           {tab === 'users' && (
-            <div className="table-container">
-              <table>
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <h3 style={{ margin: 0 }}>Manage Users</h3>
+                <button className="btn btn-primary" onClick={() => setIsAddingUser(true)}>+ Add User</button>
+              </div>
+
+              {isAddingUser && (
+                <div className="card" style={{ marginBottom: '20px', background: 'var(--bg-secondary)' }}>
+                  <h4 style={{ marginTop: 0, marginBottom: '16px' }}>Add New User</h4>
+                  {addError && <div className="alert alert-error" style={{ marginBottom: '16px', color: 'var(--error)' }}>{addError}</div>}
+                  <form onSubmit={handleAddUser} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    <input type="text" className="input" placeholder="Name" required value={addUserForm.name} onChange={e => setAddUserForm({...addUserForm, name: e.target.value})} />
+                    <input type="email" className="input" placeholder="Email" required value={addUserForm.email} onChange={e => setAddUserForm({...addUserForm, email: e.target.value})} />
+                    <input type="password" className="input" placeholder="Password" required minLength={6} value={addUserForm.password} onChange={e => setAddUserForm({...addUserForm, password: e.target.value})} />
+                    
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                      <input type="checkbox" checked={addUserForm.isAdmin} onChange={e => setAddUserForm({...addUserForm, isAdmin: e.target.checked})} />
+                      Is Admin
+                    </label>
+                    
+                    {addUserForm.isAdmin && (
+                      <input type="text" className="input" placeholder="Admin ID (Unique)" required={addUserForm.isAdmin} value={addUserForm.adminId} onChange={e => setAddUserForm({...addUserForm, adminId: e.target.value})} />
+                    )}
+
+                    <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
+                      <button type="submit" className="btn btn-primary">Add User</button>
+                      <button type="button" className="btn btn-ghost" onClick={() => { setIsAddingUser(false); setAddError(''); }}>Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              )}
+
+              <div className="table-container">
+                <table>
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -238,6 +286,7 @@ const AdminPage = () => {
                 </tbody>
               </table>
               {users.length === 0 && <div className="empty-state"><p>No users found</p></div>}
+              </div>
             </div>
           )}
 
