@@ -37,11 +37,12 @@ const GoogleCallback = () => {
       // Sync AuthContext state
       if (setUserFromGoogle) setUserFromGoogle(user);
 
-      navigate(user.isAdmin ? '/admin' : '/dashboard', { replace: true });
+      // Force a hard navigation so AuthContext properly mounts with the new token
+      window.location.href = user.isAdmin ? '/admin' : '/dashboard';
     } catch {
-      navigate('/login?error=google_failed', { replace: true });
+      window.location.href = '/login?error=google_failed';
     }
-  }, [navigate, setUserFromGoogle]);
+  }, [setUserFromGoogle]);
 
   return (
     <div style={{
