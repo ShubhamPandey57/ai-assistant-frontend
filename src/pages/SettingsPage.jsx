@@ -13,7 +13,7 @@ import './SettingsPage.css';
 const TABS = [
   { id: 'profile',    icon: '👤', label: 'Profile' },
   { id: 'appearance', icon: '🎨', label: 'Appearance' },
-  { id: 'security',   icon: '🔒', label: 'Security' },
+  { id: 'security',   icon: '🔒', label: 'Account Details' },
   { id: 'report',     icon: '🐛', label: 'Report Issue' },
 ];
 
@@ -256,7 +256,7 @@ const SettingsPage = () => {
                 </div>
 
                 <div className="settings-field">
-                  <label className="settings-label">{user?.isAdmin ? 'Admin ID' : 'Email Address'} <span className="settings-label-hint">(read-only — change in Security tab)</span></label>
+                  <label className="settings-label">{user?.isAdmin ? 'Admin ID' : 'Email Address'} <span className="settings-label-hint">(read-only — change in Account Details tab)</span></label>
                   <input
                     type="text"
                     className="settings-input settings-input--readonly"
@@ -329,11 +329,11 @@ const SettingsPage = () => {
             </div>
           )}
 
-          {/* ── SECURITY ── */}
+          {/* ── ACCOUNT DETAILS ── */}
           {activeTab === 'security' && (
             <div className="settings-section">
               <div className="settings-section-header">
-                <h2>Security</h2>
+                <h2>Account Details</h2>
                 <p>Keep your account safe by updating your credentials regularly.</p>
               </div>
 
