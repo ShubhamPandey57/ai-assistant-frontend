@@ -68,7 +68,7 @@ const DashboardPage = () => {
     <div>
       <div className="page-header">
         <div>
-          <h1>Dashboard <span className="gradient-text">🗯️</span></h1>
+          <h1>Dashboard <span className="gradient-text">✨</span></h1>
           <p style={{ marginTop: 4 }}>Welcome back, <strong style={{ color: 'var(--text-primary)' }}>{user?.name}</strong></p>
         </div>
         <button id="upload-trigger-btn" className="btn btn-primary" onClick={() => setShowUpload(true)}>
