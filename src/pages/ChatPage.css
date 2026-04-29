@@ -121,7 +121,7 @@
 
 .message-bubble.user {
   background: var(--accent-gradient);
-  color: white;
+  color: rgb(225, 225, 225);
   border-bottom-right-radius: 4px;
 }
 
