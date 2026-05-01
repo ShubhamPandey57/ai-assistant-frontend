@@ -45,7 +45,7 @@
 
 .flashcard-back {
   background: rgba(124, 58, 237, 0.12);
-  border-color: rgba(124, 58, 237, 0.3);
+  border-color: rgba(129, 64, 241, 0.3);
   transform: rotateY(180deg);
 }
 
