@@ -53,7 +53,7 @@
   font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.1em;
   color: var(--text-muted);
   margin-bottom: 10px;
 }
