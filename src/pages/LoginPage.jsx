@@ -160,7 +160,7 @@ const LoginPage = () => {
                 )}
               </div>
 
-              <div className="form-group-mod">
+              <div className="form-group-modern">
                 <input
                   id="login-password"
                   type={showPassword ? "text" : "password"}
