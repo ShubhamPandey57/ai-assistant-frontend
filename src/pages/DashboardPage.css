@@ -6,7 +6,7 @@
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   z-index: 200;
   animation: fadeIn 0.2s ease;
 }
