@@ -232,7 +232,7 @@ const LoginPage = () => {
           </div>
 
           <div className="auth-right-footer">
-            <div className="footer-links">
+            {/* <div className="footer-links"> */}
               <Link to="#">Contact Us</Link>
               <span className="lang-selector">English ⌄</span>
             </div>
