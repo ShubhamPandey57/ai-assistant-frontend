@@ -15,7 +15,7 @@
 
 .upload-zone:hover {
   border-color: var(--accent-purple);
-  background: rgba(124, 58, 237, 0.05);
+  background: rgba(122, 57, 234, 0.05);
 }
 
 .upload-zone.dragging {
