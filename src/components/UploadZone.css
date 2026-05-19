@@ -68,7 +68,7 @@
 
 /* Progress bar */
 .upload-progress-bar {
-  height: 5px;
+  height: 4px;
   background: var(--bg-input);
   border-radius: 4px;
   margin-top: 10px;
