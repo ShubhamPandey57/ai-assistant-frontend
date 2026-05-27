@@ -24,7 +24,7 @@
   padding: 16px 24px;
   border-bottom: 1px solid var(--border-color);
   gap: 12px;
-  flex-shrink: 1;
+  flex-shrink: 0;
 }
 
 .chat-header-left {
