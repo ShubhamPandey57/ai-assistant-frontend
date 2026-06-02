@@ -13,7 +13,7 @@
   /* Layout Colors (Sidebar/Header) */
   --layout-bg: #0f172a;
   --layout-bg-header: rgba(15, 23, 42, 0.9);
-  --layout-text: #e6e6e7;
+  --layout-text: #e2e2e2;
   --layout-text-muted: #94a3b8;
   --layout-border: rgba(255, 255, 255, 0.08);
 
@@ -24,7 +24,7 @@
   --accent-gradient: linear-gradient(90deg, #ff4d4d, #c92a6c);
   --accent-gradient-hover: linear-gradient(90deg, #e63946, #b0205c);
 
-  --text-primary: #111827;
+  --text-primary: #111828;
   --text-secondary: #4b5563;
   --text-muted: #9ca3af;
   --text-accent: #ff4d4d;
