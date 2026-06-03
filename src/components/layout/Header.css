@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 32px;
-  z-index: 90;
+  z-index: 80;
   transition: all 0.3s ease;
   box-sizing: border-box;
 }
