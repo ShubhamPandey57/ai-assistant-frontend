@@ -60,7 +60,7 @@
   border-left-color: #ff4d4d;
   border-bottom-color: #8e44ad;
   flex-shrink: 0;
-  box-shadow: 0 0 15px rgba(255, 77, 77, 0.4);
+  box-shadow: 0 0 15px rgba(250, 76, 76, 0.4);
 }
 
 .sidebar .logo-text {
